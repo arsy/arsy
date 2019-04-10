@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  php-fpm:
+    build: php-fpm
+    ports:
+      - "9000:9000"
+    volumes:
+      - ../www:/var/www:cached
+    networks:
+      arsy_net:
+        ipv4_address: 10.0.0.2
+  nginx:
+    build: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../www:/var/www:cached
+    depends_on:
+      - php-fpm
+    networks:
+      arsy_net:
+        ipv4_address: 10.0.0.3
+  mysql:
+    build: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    depends_on:
+      - php-fpm
+      - nginx
+    networks:
+      arsy_net:
+        ipv4_address: 10.0.0.4
+
+networks:
+  arsy_net:
+    name: arsy_net
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/24
