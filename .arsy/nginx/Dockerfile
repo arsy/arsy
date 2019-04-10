@@ -2,7 +2,6 @@ FROM nginx:alpine
 
 LABEL maintainer="Yakup Arslan <me@yakupars.pw>"
 
-ADD symfony.conf /etc/nginx/conf.d/
-#ADD laravel.conf /etc/nginx/conf.d/
+WORKDIR /var/www
 
 EXPOSE 443
