@@ -4,6 +4,12 @@ LABEL maintainer="Yakup Arslan <me@yakupars.pw>"
 
 RUN docker-php-ext-install pdo_mysql
 
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+ADD xdebug.ini  /usr/local/etc/php/conf.d/
+
 WORKDIR /var/www
 
 RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
