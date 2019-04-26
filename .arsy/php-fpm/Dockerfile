@@ -11,7 +11,9 @@ RUN apk add --no-cache $PHPIZE_DEPS \
 ADD xdebug.ini  /usr/local/etc/php/conf.d/
 
 ENV PHP_IDE_CONFIG serverName=docker
+ENV XDEBUG_CONFIG idekey=docker
 
 WORKDIR /var/www
 
 RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
+RUN wget -O /usr/bin/phpunit https://phar.phpunit.de/phpunit-8.phar && chmod +x /usr/bin/phpunit
