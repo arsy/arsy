@@ -1,1 +1,4 @@
 .arsy/mysql/data
+.idea
+
+.DS_Store
