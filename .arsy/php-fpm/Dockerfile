@@ -12,7 +12,6 @@ ADD php.ini  /usr/local/etc/php/conf.d/
 ADD xdebug.ini  /usr/local/etc/php/conf.d/
 
 ENV PHP_IDE_CONFIG serverName=docker
-ENV XDEBUG_CONFIG idekey=docker
 
 WORKDIR /var/www
 
